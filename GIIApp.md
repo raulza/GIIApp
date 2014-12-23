@@ -81,3 +81,6 @@ Want to know more?
 <h4>You got it! Check the GII shiny App here: <br><br>
 
 https://raul.shinyapps.io/courseProj/</h4><p>
+
+Data and source code: https://github.com/raulza/GIIApp
+
