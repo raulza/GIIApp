@@ -1,0 +1,52 @@
+---
+title: "Global Innovation Index App Documentation"
+author: "Raul Zambrano"
+date: "12/20/2014"
+output: html_document
+---
+
+This document contains detailed information for the Global Innovation Index (GII) shiny app. The GII 2014 was co-publised by Cornell University, INDEAD and WIPO. For more GII details please visit: 
+
+https://www.globalinnovationindex.org/content.aspx?page=GII-Home.
+
+This a a very simple app that allows users to quickly get the rakings for any of the 143 countries included in GII. 
+
+The user has two options to do this. The first one is to select a country  from a drop down list and obtain the country's GII rank, the actual GII score, as well as its population and GDP per capita.
+
+The second option allows users to select the top N GII ranked countries, N being a number provided by the end user. In this case, the App displays a table of the top N countries in similar format to the first option. Users can also select all countries.
+
+The app uses data furnished to me by Cornell University in XLS format. As this data was not very clean, I did some simple modifications to the original and kept only the first 18 variables which what I needed to develop the App. 
+
+Here is how the clean data looks like:
+```{r data}
+innov <- read.csv("./GlobalInnovationIndex2014.csv",as.is=c(1:2,6:9))
+str(innov)
+head(innov,1)
+```
+
+To develop the shiny app I wrote a simple R script that reads the data, keeps only the 5 variables I used for the app, renames the variables and creates a list of countries sorted alphabetically which I  used to display the drop down menu for the Select Country option in the shiny App.
+
+Here is the code:
+```{r code, results='hide'}
+innov <- innov[,c(-2,-4,-6:-9,-11:-13,-15:-17)]
+names(innov) <- c("Country","Population","GDPperCap","Rank","Score")
+allCtrys <- sort(innov[ , "Country"])
+```
+
+The shiny server.R file runs all this from the R script I created, once the App is launched -and only once per session!
+
+That's all folks. Enjoy!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
